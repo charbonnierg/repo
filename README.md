@@ -1,12 +1,10 @@
-# Samples Python Monorepo
+# Python Monorepo
 
-This repository holds all Python software development related to the samples project.
+This repository contains a tool to manage python mono repo easily using `poetry` and `git`.
 
-It contains several python packages, which can be built and distributed independently from each other.
+It can host several python packages, which can be built and distributed independently from each other.
 
 ## Prerequisites
-
-Test
 
 This repository leverages [`poetry`](https://python-poetry.org/docs/basic-usage/), a python dependency management tool in order to install and build all packages.
 
@@ -85,11 +83,22 @@ repo format
 
 ### Adding a new package
 
-In order to add a new package, the following files must be present:
+In order to add a new package, use the `repo` tool:
 
-- `pyproject.toml`: Each package must have a valid poetry configuration file named `pyproject.toml`.
-- `tests/`: Each package must have a test directory, even if empty. (Use `.gitkeep` files if you need!)
+- In order to create a library:
 
-Take a look at existing packages to create a new one and open an issue on Azure Devops if you encounter any problem.
+```bash
+repo new library my-library
+```
 
-Once you created your files, simple run `repo install` to install your newly created package.
+- In order to create a plugin:
+
+```bash
+repo new plugin my-plugin
+```
+
+- In order to create an application:
+
+```bash
+repo new application my-app
+```
