@@ -1,4 +1,4 @@
-name: Validation
+name: Build
 
 on: push
 
@@ -29,18 +29,10 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Install all packages
+      - name: Build all packages
         run: |
-          repo install
+          repo export
 
-      - name: Format packages
+      - name: List packages
         run: |
-          repo format
-
-      - name: Lint packages
-        run: |
-          repo lint
-
-      - name: Typecheck packages
-        run: |
-          repo typecheck
+          ls -lhtr dist/
