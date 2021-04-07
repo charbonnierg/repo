@@ -1,0 +1,66 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - feature/**
+      - fix/**
+      - next
+
+
+jobs:
+  lint:
+    name: Run unit tests and integration tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install poetry
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+
+      - name: Install python package
+        run: |
+          poetry config virtualenvs.create false
+          poetry install
+
+      - name: Install all packages
+        run: |
+          repo install
+
+      - name: Install docker
+        uses: docker-practice/actions-setup-docker@master
+
+      - name: Start tests containers
+        run: |
+          docker run -d --name test-minio -p 9000:9000 minio/minio:latest server /data
+          docker run -d --name test-mongo -p 27017:27017 mongo:latest --replSet "rs0" --bind_ip_all
+          docker run -d --name test-nats -p 4222:4222 nats:latest
+
+      - name: Setup mongodb replica set
+        run: |
+          echo -n "Waiting for the mongo replica set to be initialised"
+          while true; do
+            echo -n "."
+            mongoOutput="$(docker exec test-mongo mongo --eval "rs.initiate() || rs.status()")"
+            replicaSetInitialised=$(grep '"ok" :' <<<"$mongoOutput" | rev | cut -c2-2)
+            if [ "$replicaSetInitialised" = "1" ]; then
+                break
+            fi
+            sleep 2
+          done
+
+      - name: Test packages
+        run: |
+          repo test

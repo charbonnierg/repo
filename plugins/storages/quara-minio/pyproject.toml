@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "quara-minio"
+version = "1.0.0-rc.1"
+packages = [{ include = "quara" }]
+description = "Python client library for MinIO S3 compatible storage."
+authors = ["Guillaume Charbonnier <guillaume.charbonnier@capgemini.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+quara-core = "^1.0.0-rc.1"
+minio = "^7.0.3"
+
+[tool.poetry.dev-dependencies]
+quara-core = { path = "../../../libraries/quara-core" }
+colorama = "^0.4.4"
+
+[tool.poetry.plugins."quara.storages"]
+"minio" = "quara.storages._minio:AsyncioMinioClient"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

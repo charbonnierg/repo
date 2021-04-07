@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "quara-nats"
+version = "1.0.0-rc.1"
+packages = [{ include = "quara" }]
+description = "NATS client for python"
+authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+quara-core = "^1.0.0-rc.1"
+asyncio-nats-client = "^0.11.4"
+
+[tool.poetry.dev-dependencies]
+quara-core = { path = "../../../libraries/quara-core" }
+colorama = "^0.4.4"
+
+[tool.poetry.plugins."quara.brokers"]
+"nats" = "quara.brokers._nats:AsyncioNatsBroker"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

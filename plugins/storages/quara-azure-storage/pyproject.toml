@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "quara-azure-storage"
+version = "1.0.0-rc.1"
+packages = [{ include = "quara" }]
+description = "Python client library for Azure Blob Storage (S3 compatible storage)."
+authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+quara-core = "^1.0.0-rc.1"
+azure-storage-blob = "^12.8.0"
+
+[tool.poetry.dev-dependencies]
+quara-core = { path = "../../../libraries/quara-core" }
+colorama = "^0.4.4"
+
+[tool.poetry.plugins."quara.storages"]
+"azure" = "quara.storages.azure:AzureStorageClient"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
