@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "repo"
+name = "quara-repo"
 version = "0.1.0"
 description = ""
 authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]
