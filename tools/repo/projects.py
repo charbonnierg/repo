@@ -371,6 +371,8 @@ class Monorepo(Project):
             all_sources = []
             for package in self.get_packages():
                 all_sources += package.src
+            self.test(markers, exprs, add_src=[str(source) for source in all_sources])
+            return
         else:
             for project in self.get_packages(packages):
                 project.test(markers=markers, exprs=exprs)

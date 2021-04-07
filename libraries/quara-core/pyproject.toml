@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "quara-core"
+version = "1.0.0-rc.1"
+description = ""
+authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]
+packages = [{ include = "quara" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^1.8.1"
+loguru = "^0.5.3"
+PyYAML = "^5.4.1"
+
+[tool.poetry.dev-dependencies]
+colorama = "^0.4.4"
+Faker = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
