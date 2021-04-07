@@ -1,0 +1,6 @@
+[run]
+omit = 
+  libraries/*
+  applications/*
+  plugins/*
+  .venv/*

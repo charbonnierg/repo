@@ -102,6 +102,13 @@ def install(
     repo.install_packages(packages)
 
 
+@cli.command("clean")
+def clean(package: Optional[List[str]] = typer.Argument(default=None)) -> None:
+    """Clean directories."""
+    packages = list(package or [])
+    repo.clean_packages(packages)
+
+
 @cli.command("update")
 def update(package: Optional[List[str]] = typer.Argument(default=None)) -> None:
     """Update all packages dependencies and generate lock file."""

@@ -368,7 +368,6 @@ class Monorepo(Project):
             all_sources = []
             for package in self.get_packages():
                 all_sources += package.src
-            self.test(markers, exprs, add_src=[str(source) for source in all_sources])
         else:
             for project in self.get_packages(packages):
                 project.test(markers=markers, exprs=exprs)
@@ -457,11 +456,11 @@ class Monorepo(Project):
         """Lint package and tests using `flake8`."""
         with current_directory(self.root):
             logger.debug(f"Linting package {self.pyproject.name}")
-            run(f"flake8 {' '.join(self.src)}")
+            run("flake8 tools")
 
     def format(self) -> None:
         """Format package and tests using `isort` and `black`."""
         with current_directory(self.root):
             logger.debug(f"Formatting package {self.pyproject.name}")
-            run(f"black {' '.join(self.src)}")
-            run(f"isort {' '.join(self.src)}")
+            run("black tools")
+            run("isort tools")
