@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Union
 
-from pydantic import BaseModel, BaseSettings, Field
+from pydantic import BaseModel, BaseSettings, Field, validator
 
 
 class BuildSystem(BaseModel):
@@ -105,3 +105,11 @@ class Pyproject(BaseModel):
 
 class RepoConfig(BaseSettings):
     prefix: Optional[str] = None
+
+    class Config:
+        env_prefix = "repo_"
+        case_sensitive = False
+
+    @validator("prefix", pre=True)
+    def set_none_when_empty(cls, v):  # type: ignore
+        return v or None

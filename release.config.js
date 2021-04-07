@@ -25,11 +25,11 @@ module.exports = {
       "@semantic-release/exec",
       {
         prepareCmd:
-          "python ./.azuredevops/scripts/release.py prepare ${nextRelease.version} ${branch.name}",
+          "python ./.github/scripts/release.py prepare ${nextRelease.version} ${branch.name}",
         publishCmd:
-          "python ./.azuredevops/scripts/release.py publish  ${nextRelease.version} ${branch.name}",
+          "python ./.github/scripts/release.py publish  ${nextRelease.version} ${branch.name}",
         successCmd:
-          "python ./.azuredevops/scripts/release.py success  ${nextRelease.version} ${branch.name}",
+          "python ./.github/scripts/release.py success  ${nextRelease.version} ${branch.name}",
       },
     ],
   ],

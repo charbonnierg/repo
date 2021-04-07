@@ -31,7 +31,7 @@ jobs:
           poetry install
 
       - name: Install NodeJS and npm
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
 

@@ -299,7 +299,10 @@ class Monorepo(Project):
                 s: dict(setupcfg_parser.items(s)) for s in setupcfg_parser.sections()
             }
             if setupcfg_config.get("tool:repo"):
-                return RepoConfig(**setupcfg_config["tool:repo"])
+                _dict = setupcfg_config["tool:repo"]
+                if not _dict.get("prefix"):
+                    _dict.pop("prefix", None)
+                return RepoConfig(**_dict)
         return RepoConfig()
 
     @property
@@ -373,8 +376,14 @@ class Monorepo(Project):
                 project.test(markers=markers, exprs=exprs)
 
     def bump_packages(self, version: str) -> None:
+        bumped = []
         for project in self.get_packages():
-            project.bump(version, self.config.prefix)
+            for dep in project.private_dependencies:
+                if dep.pyproject.name not in bumped:
+                    dep.bump(version, self.config.prefix)
+                    bumped.append(dep.pyproject.name)
+            if project.pyproject.name not in bumped:
+                project.bump(version, self.config.prefix)
         self.bump(version)
 
     def lint_packages(self, packages: List[str] = []) -> None:
@@ -423,8 +432,15 @@ class Monorepo(Project):
         conftest = project_tests / "conftest.py"
         conftest.touch()
         # Bootstrap source directory
-        sources_dir = name.replace(f"{self.config.prefix}-", "").replace("-", "_")
-        if sources_dir in stdlib_list():
+        if self.config.prefix:
+            sources_dir = (
+                project_root
+                / self.config.prefix.replace("-", "_")
+                / name.replace(f"{self.config.prefix}-", "").replace("-", "_")
+            )
+        else:
+            sources_dir = project_root / name.replace("-", "_")
+        if sources_dir.name in stdlib_list():
             logger.warning(
                 f"Generated module with name {sources_dir}. "
                 f"The {sources_dir} module already exists in the standard library."
@@ -432,15 +448,11 @@ class Monorepo(Project):
         # Declare variable type
         to_include: Optional[str]
         if self.config.prefix:
-            project_sources = (
-                project_root / self.config.prefix.replace("-", "_") / sources_dir
-            )
             to_include = self.config.prefix.replace("-", "_")
         else:
-            project_sources = project_root / sources_dir
             to_include = None
-        project_sources.mkdir(parents=True, exist_ok=False)
-        init_file = project_sources / "__init__.py"
+        sources_dir.mkdir(parents=True, exist_ok=False)
+        init_file = sources_dir / "__init__.py"
         init_file.touch()
         # Create project instance
         project = Project(project_root)
