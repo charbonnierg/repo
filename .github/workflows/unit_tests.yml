@@ -1,6 +1,12 @@
 name: Unit Tests
 
-on: push
+on:
+  push:
+    branches:
+      - feature/**
+      - fix/**
+      - next
+
 
 jobs:
   lint:

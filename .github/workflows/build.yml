@@ -1,6 +1,9 @@
 name: Build
 
-on: push
+on:
+  push:
+    branches:
+      - releases/**
 
 jobs:
   lint:
@@ -36,3 +39,19 @@ jobs:
       - name: List packages
         run: |
           ls -lhtr dist/
+
+      - name: Write changelog update
+        run: |
+          git diff HEAD^ HEAD --unified=0 CHANGELOG.md | tail +6 | sed -e 's/^\+//' | sed 1d > CHANGES.md
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          # TODO: Specify prerelease when that's the case
+          # prerelease: 
+          body_path: CHANGES.md
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: charbonnierg/repo

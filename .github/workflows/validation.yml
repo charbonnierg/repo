@@ -1,6 +1,11 @@
 name: Validation
 
-on: push
+on:
+  push:
+    branches:
+      - feature/**
+      - fix/**
+      - next
 
 jobs:
   lint:
