@@ -1,0 +1,46 @@
+[tool.commitizen]
+name = "cz_customize"
+
+[tool.commitizen.customize]
+message_template = "{{subject}}({{ scope }}):{% if show_message %} {{message}}{% endif %}"
+example = "feature(brokers): added next_message method to message broker resource"
+schema = "<type>(<scope>): <body>"
+schema_pattern = "(feat|fix|perf|test|build|ci|refactor|revert|chore)(\\((apps|auth|broker|core|db|devops|http|ml|tools|services|scheduler|storage|pkg|repo|cli)\\))?: (.+)"
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "subject"
+choices = [
+    { value = "feat", name = "feat: A new feature." },
+    { value = "fix", name = "fix: A bug fix." },
+    { value = "test", name = "test: A changes to tests only." },
+    { value = "perf", name = "perf: Performance enhancement that do not impact public API." },
+    { value = "build", name = "build: Changes to build tools/scripts." },
+    { value = "ci", name = "ci: Changes to Azure DevOps pipelines or templates." },
+    { value = "refactor", name = "refactor: Changes that do not impact public API." },
+    { value = "revert", name = "revert: Revert state to a previous commit." },
+    { value = "chore", name = "chore: Anything that does not fit in above categories." },
+]
+message = "Select the type of change you are committing"
+
+[[tool.commitizen.customize.questions]]
+choices = [
+    { value = "apps", name = "apps: Change to applications." },
+    { value = "core", name = "core: Changes to core package." },
+    { value = "devops", name = "devops: Changes to devops libraries" },
+    { value = "repo", name = "repo: Changes related to git repository management." },
+    { value = "cli", name = "cli: Changes to command line interface." },
+]
+type = "list"
+name = "scope"
+message = "Select the type of change you are committing"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "message"
+message = "Body."
+
+[[tool.commitizen.customize.questions]]
+type = "confirm"
+name = "show_message"
+message = "Do you want to add body message in commit?"

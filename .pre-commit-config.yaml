@@ -1,0 +1,43 @@
+default_stages: [commit]
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: format-code
+        entry: python -m
+        args:
+          - black
+        language: system
+        types: [python]
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: sort-imports
+        entry: python -m
+        args:
+          - isort
+        language: system
+        types: [python]
+
+  - repo: local
+    hooks:
+      - id: flake8
+        name: lint-code
+        entry: python -m
+        args:
+          - flake8
+        language: system
+        types: [python]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=50000"]
+
+  - repo: https://github.com/woile/commitizen
+    rev: v2.4.1
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
