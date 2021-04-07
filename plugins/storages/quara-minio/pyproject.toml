@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quara-minio"
-version = "1.0.0-rc.1"
+version = "1.0.0-rc.2"
 packages = [{ include = "quara" }]
 description = "Python client library for MinIO S3 compatible storage."
 authors = ["Guillaume Charbonnier <guillaume.charbonnier@capgemini.com>"]

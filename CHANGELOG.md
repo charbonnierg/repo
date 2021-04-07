@@ -1,3 +1,10 @@
+## [1.0.0-rc.2](https://github.com/charbonnierg/repo/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2021-04-07)
+
+
+### Features
+
+* **core:** proposed Broker, Database, Scheduler, and Storage API in core package ([e506658](https://github.com/charbonnierg/repo/commit/e506658cc360074376e0224af3fd4aa465f8d2ad))
+
 ## 1.0.0-rc.1 (2021-04-07)
 
 
