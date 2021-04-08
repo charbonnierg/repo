@@ -16,4 +16,4 @@ pre-commit install
 # Install pre-commit commit-msg hooks
 pre-commit install --hook-type commit-msg
 # Install jupyter kernel
-python -m ipykernel install --user --name python-samples --display-name "python-samples ($(python --version))"
+python -m ipykernel install --user --name repo --display-name "repo ($(python --version))"

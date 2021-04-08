@@ -1,0 +1,5 @@
+---
+broker:
+  host: 127.0.0.1
+extra_options:
+  name: test
