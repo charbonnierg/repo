@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quara-services"
-version = "1.0.0-rc.2"
+version = "1.0.0-rc.3"
 packages = [{ include = "quara" }]
 description = "Cloud-native HTTP-PUB/SUB services using python."
 authors = ["Guillaume Charbonnier <guillaume.charbonnier@capgemini.com>"]

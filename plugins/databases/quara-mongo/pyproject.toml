@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quara-mongo"
-version = "1.0.0-rc.2"
+version = "1.0.0-rc.3"
 packages = [{ include = "quara" }]
 description = "Manage MongoDB database collections from python using quara API"
 authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]

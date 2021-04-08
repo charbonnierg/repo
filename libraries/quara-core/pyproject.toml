@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quara-core"
-version = "1.0.0-rc.2"
+version = "1.0.0-rc.3"
 description = ""
 authors = ["Guillaume Charbonnier <guillaume.charbonnier@araymond.com>"]
 packages = [{ include = "quara" }]

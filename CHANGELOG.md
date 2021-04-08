@@ -1,3 +1,10 @@
+## [1.0.0-rc.3](https://github.com/charbonnierg/repo/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2021-04-08)
+
+
+### Features
+
+* **core:** added quara-services library to easily create custom applications ([da95ad5](https://github.com/charbonnierg/repo/commit/da95ad5be4b6d55e7c4c64e6661f44a38acc2233))
+
 ## [1.0.0-rc.2](https://github.com/charbonnierg/repo/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2021-04-07)
 
 
